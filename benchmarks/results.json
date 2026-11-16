@@ -1,0 +1,77 @@
+{
+  "project": "Kolmos",
+  "website": "https://kolmos.dev",
+  "benchmarks_url": "https://kolmos.dev/benchmarks",
+  "hardware": {
+    "cpu": "8 vCPU AMD EPYC 7R13 @ 3.2 GHz",
+    "ram": "32 GB DDR4 ECC",
+    "disk": "NVMe SSD (PCIe 4.0)",
+    "os": "Ubuntu 22.04 LTS / Windows 11"
+  },
+  "baseline": {
+    "format": "Apache Parquet",
+    "codec": "zstd",
+    "compression_level": 3,
+    "dictionary_encoding": true
+  },
+  "datasets": [
+    {
+      "id": "tpch-lineitem",
+      "name": "TPC-H Lineitem",
+      "records": 500000,
+      "raw_size_mb": 59.2,
+      "parquet_zstd_mb": 12.70,
+      "kolmos_mb": 7.67,
+      "ratio_vs_parquet": 1.656,
+      "space_saving_pct": 39.6,
+      "ingest_throughput_rows_sec": 248000,
+      "scan_latency_ms": 18.4,
+      "parquet_scan_latency_ms": 11.2
+    },
+    {
+      "id": "nyc-taxi",
+      "name": "NYC Yellow Taxi Trips",
+      "records": 200000,
+      "raw_size_mb": 28.4,
+      "parquet_zstd_mb": 3.50,
+      "kolmos_mb": 1.61,
+      "ratio_vs_parquet": 1.892,
+      "space_saving_pct": 54.0,
+      "ingest_throughput_rows_sec": 329000,
+      "scan_latency_ms": 9.2,
+      "parquet_scan_latency_ms": 4.8
+    },
+    {
+      "id": "clickstream-events",
+      "name": "User Clickstream Events",
+      "records": 500000,
+      "raw_size_mb": 68.5,
+      "parquet_zstd_mb": 5.16,
+      "kolmos_mb": 1.89,
+      "ratio_vs_parquet": 2.117,
+      "space_saving_pct": 63.4,
+      "ingest_throughput_rows_sec": 194000,
+      "scan_latency_ms": 12.6,
+      "parquet_scan_latency_ms": 3.1
+    },
+    {
+      "id": "mongo-events-cloud",
+      "name": "MongoDB Document Events",
+      "records": 1000000,
+      "raw_size_mb": 71.3,
+      "parquet_zstd_mb": 5.40,
+      "kolmos_mb": 2.60,
+      "ratio_vs_parquet": 2.080,
+      "space_saving_pct": 51.8,
+      "ingest_throughput_rows_sec": 280000,
+      "scan_latency_ms": 24.0,
+      "parquet_scan_latency_ms": 15.0
+    }
+  ],
+  "cost_comparison_monthly": {
+    "10TB": { "rds_gp3": 1150, "mongo_atlas": 2500, "kolmos_object_storage": 75 },
+    "50TB": { "rds_gp3": 5750, "mongo_atlas": 12500, "kolmos_object_storage": 375 },
+    "100TB": { "rds_gp3": 11500, "mongo_atlas": 25000, "kolmos_object_storage": 750 },
+    "500TB": { "rds_gp3": 57500, "mongo_atlas": 125000, "kolmos_object_storage": 3750 }
+  }
+}
